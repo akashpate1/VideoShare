@@ -121,8 +121,11 @@ public class MainActivity extends AppCompatActivity {
         videoListAdapter = new VideoListAdapter(this,videoList);
         //connect adapter to recyclerView
         mRecyclerView.setAdapter(videoListAdapter);
-        //Give recycler view default layout manager
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        //Give recycler view default layout manager with reverseLayout to view latest videos first
+        LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(this);
+        mLinearLayoutManager.setReverseLayout(true);
+        mLinearLayoutManager.setStackFromEnd(true);
+        mRecyclerView.setLayoutManager(mLinearLayoutManager);
 
         refreshVideo = findViewById(R.id.refreshVideo);
 
