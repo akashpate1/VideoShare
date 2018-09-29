@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "396745461606",
+    "firebase_url": "https://video-share-e0e93.firebaseio.com",
+    "project_id": "video-share-e0e93",
+    "storage_bucket": "video-share-e0e93.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:396745461606:android:3b48a8b1d4e00d6b",
+        "android_client_info": {
+          "package_name": "com.akashpate.videoshare"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "396745461606-q75fpuen2mtkbrb6mokbksf1dugee6ku.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDrQUJyBXI0ALIKzs-1ayHOlybyhbpHHU4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
