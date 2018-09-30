@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -53,21 +54,25 @@ public class LoginActivity extends AppCompatActivity{
                 String email = editEmail.getText().toString();
                 String password = editPassword.getText().toString();
 
-                mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()){
-                            Toast.makeText(LoginActivity.this,"Registration Success",Toast.LENGTH_SHORT).show();
-                            FirebaseUser currentUser = mAuth.getCurrentUser();
-                            Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-                            intent.putExtra("User",currentUser);
-                            startActivity(intent);
-                        } else{
-                            Toast.makeText(LoginActivity.this,"Registration Failed"+ task.getException(),Toast.LENGTH_SHORT).show();
+                try {
+                    mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(LoginActivity.this, "Registration Success", Toast.LENGTH_SHORT).show();
+                                FirebaseUser currentUser = mAuth.getCurrentUser();
+                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                intent.putExtra("User", currentUser);
+                                startActivity(intent);
+                            } else {
+                                Toast.makeText(LoginActivity.this, "Registration Failed : " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
 
+                            }
                         }
-                    }
-                });
+                    });
+                }catch (Exception e){
+                    Toast.makeText(LoginActivity.this,e.getMessage(),Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -77,21 +82,26 @@ public class LoginActivity extends AppCompatActivity{
                 String email = editEmail.getText().toString();
                 String password = editPassword.getText().toString();
 
-                mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()){
-                            Toast.makeText(LoginActivity.this,"Login Success",Toast.LENGTH_SHORT).show();
-                            FirebaseUser currentUser = mAuth.getCurrentUser();
-                            Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-                            intent.putExtra("User",currentUser);
-                            startActivity(intent);
-                        }else{
-                            Toast.makeText(LoginActivity.this,"Login Failed",Toast.LENGTH_SHORT).show();
+                try {
+                    mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(LoginActivity.this, "Login Success", Toast.LENGTH_SHORT).show();
+                                FirebaseUser currentUser = mAuth.getCurrentUser();
+                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                intent.putExtra("User", currentUser);
+                                startActivity(intent);
+                            } else {
+                                Toast.makeText(LoginActivity.this, "Login Failed : "+ task.getException().getMessage(), Toast.LENGTH_LONG).show();
 
+                            }
                         }
-                    }
-                });
+                    });
+                }catch (Exception e){
+                    Toast.makeText(LoginActivity.this,e.getMessage(),Toast.LENGTH_SHORT).show();
+
+                }
             }
         });
     }
