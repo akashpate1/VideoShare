@@ -115,6 +115,12 @@ public class UploadActivity extends AppCompatActivity {
                         progressDialog.dismiss();
                         //Uri uri = videoRef.getDownloadUrl().getResult();
                         Toast.makeText(UploadActivity.this,"Upload Success",Toast.LENGTH_SHORT).show();
+                        videoRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                videoDbRef.child("url").push().setValue(uri.toString());
+                            }
+                        });
                     }
                 });
                 uploadTask.addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
@@ -134,13 +140,7 @@ public class UploadActivity extends AppCompatActivity {
                 });
 
 
-                videoRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                    @Override
-                    public void onSuccess(Uri uri) {
-                        Toast.makeText(UploadActivity.this,uri.toString(),Toast.LENGTH_LONG).show();
-                        videoDbRef.child("url").push().setValue(uri.toString());
-                    }
-                });
+
 
 
             }
